@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+<div class="container" >
+    <table border="1px solid black" id="example">
+        <thead>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Position</th>
+            <th>Email</th>
+            <th>Office</th>
+            <th>Start Date</th>
+            <th>Age</th>
+            <th>Salary</th>
+            <th>Seq</th>
+            <th>Extn</th>
+        </thead>
+        <tbody style=text-align:center>
+        
+        <script>
+            
+            var table = $(document).ready(function(){
+                $("#example").DataTable({
+                    "ajax":{
+                        'url':'/api/data',
+                        'type':'POST',                                                
+                        "dataSrc":"",
+                    },
+                    "columns": [
+                        { "data": "id"},
+                        { "data": "first_name" },
+                        { "data": "last_name" },
+                        { "data": "position" },
+                        { "data": "email" },
+                        { "data": "office" },
+                        { "data": "start_date" },
+                        { "data": "age" },
+                        { "data": "salary" },
+                        { "data": "seq" },
+                        { "data": "extn" },
+                    ],
+                    "pagingType":"full_numbers",
+                    "dom" : "fltip",
+                    "stateSave":true,
+                    "order":[[0,"asc"]],
+                });
+            });
+
+            var filteredData = table
+                .column( 0 )
+                .data()
+                .filter( function ( value, index ) {
+                    return value > 20 ? true : false;
+            } );
+        </script>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
